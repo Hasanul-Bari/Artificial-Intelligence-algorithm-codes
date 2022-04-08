@@ -9,3 +9,7 @@ uninformed search/bidirectional_search.o
 uninformed search/dfs
 uninformed search/dfs.o
 adversarial search (games)/alpha_beta_pruning
+informed search/a_star
+informed search/a_star.o
+informed search/best_first
+informed search/best_first.o
