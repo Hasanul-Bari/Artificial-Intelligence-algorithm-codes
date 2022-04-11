@@ -2,32 +2,10 @@
 using namespace std;
 
 vector<int> adj[1000],cost[1000];
-int h[1000];
-int vis[1000];
+int h[1000],f[1000],g[1000];
 int p[1000];
 int n,e;
 
-
-class node
-{
-public:
-    int n,f,g;
-
-    node() {}
-
-    node(int nn,int ff)
-    {
-        n=nn;
-        f=ff;
-    }
-};
-
-bool operator<(node a,node b)
-{
-    return b.f<a.f;
-}
-
-priority_queue <node> pq;
 
 
 void path(int u,int s)
@@ -46,30 +24,47 @@ void path(int u,int s)
 
 void astar(int src,int dest)
 {
-    node nd(src,h[src]);
+
+    for(int i=0; i<n; i++)
+    {
+        g[i]=INT_MAX;
+        f[i]=INT_MAX;
+    }
+    g[src]=0;
+    f[src]=g[src]+h[src];
 
 
-    pq.push(nd);
+    priority_queue< pair<int,int> , vector<pair<int,int> >, greater<pair<int,int> > > pq;   //first f(n) , second node
+
+    pq.push({f[src],src});
+
+
 
     while(!pq.empty())
     {
-        node curr=pq.top();
+        auto x=pq.top();
 
-        int x=curr.n;
+        int curr=x.second, currF=x.first;
+
+        //cout<<currF<<" x "<<curr<<endl;
 
         pq.pop();
 
-        for(int i=0; i<adj[x].size(); i++)
+        for(int i=0; i<adj[curr].size(); i++)
         {
-            int v=adj[x][i];
+            int v=adj[curr][i];
+            int c=cost[curr][i];
 
-            if(vis[v]==false)
+            if(g[curr]+c+h[v]<f[v])
             {
-                p[v]=x;
+                p[v]=curr;
 
-                vis[v]=true;
+                g[v]=g[curr]+c;
+                f[v]=g[v]+h[v];
 
-                pq.push({v,h[v]});
+                //cout<<f[v]<<" "<<g[v]<<" "<<h[v]<<" * "<<v<<endl;
+
+                pq.push({f[v],v});
 
             }
         }
@@ -77,6 +72,8 @@ void astar(int src,int dest)
 
     cout<<"Path : ";
     path(dest,src);
+
+    cout<<endl<<f[dest]<<endl;
 }
 
 int main()
@@ -91,7 +88,7 @@ int main()
     int u,v,z;
     for(int i=0; i<e; i++)
     {
-        cin>>u>>v;
+        cin>>u>>v>>z;
         adj[u].push_back(v);
         adj[v].push_back(u);
         cost[u].push_back(z);
@@ -110,6 +107,66 @@ int main()
     astar(src,dest);
 
 }
+
+/*
+7 9
+0 1 4
+0 2 3
+1 4 5
+1 5 12
+2 5 10
+2 3 7
+3 5 2
+4 6 16
+5 6 5
+14 12 11 6 11 4 0
+0 6
+*/
+
+/*
+Path : 0 2 3 5 6
+17
+*/
+
+
+/*
+10 14
+0 1 6
+1 2 3
+1 3 2
+2 3 1
+2 4 5
+3 4 8
+0 5 3
+5 6 1
+5 7 7
+6 8 3
+7 8 2
+8 4 5
+8 9 3
+4 9 5
+10 8 5 7 3 6 5 3 1 0
+0 9
+*/
+
+/*
+Path : 0 5 6 8 9
+10
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 8 10
