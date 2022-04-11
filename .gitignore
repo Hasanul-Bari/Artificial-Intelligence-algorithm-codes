@@ -13,3 +13,5 @@ informed search/a_star
 informed search/a_star.o
 informed search/best_first
 informed search/best_first.o
+informed search/best_first efficient.o
+informed search/best_first efficient
