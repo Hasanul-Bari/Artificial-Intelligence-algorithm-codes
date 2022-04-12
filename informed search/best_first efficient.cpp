@@ -26,6 +26,8 @@ void best_first(int src,int dest)
 {
     priority_queue< pair<int,int> , vector<pair<int,int> >, greater<pair<int,int> > > pq;   //first h[n] , second node
 
+    vis[src]=true;
+
     pq.push({h[src],src});
 
     while(!pq.empty())
