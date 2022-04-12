@@ -15,3 +15,5 @@ informed search/best_first
 informed search/best_first.o
 informed search/best_first efficient.o
 informed search/best_first efficient
+adversarial search (games)/minmax_flexible
+adversarial search (games)/minmax_flexible.o
