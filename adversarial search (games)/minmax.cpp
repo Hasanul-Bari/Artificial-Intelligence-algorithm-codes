@@ -2,7 +2,6 @@
 using namespace std;
 
 int a[10000];
-int tree[30000];
 
 int n,depth,branch;
 
@@ -37,7 +36,7 @@ int main()
     //cout<<"Enter the depth and branch";
     cin>>depth>>branch;
 
-    n=round(pow(2,depth));
+    n=round(pow(branch,depth));
 
     //cout<<"Enter "<<n<<" leaf node values : "<<endl;
 
