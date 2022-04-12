@@ -2,7 +2,6 @@
 using namespace std;
 
 int a[10000];
-int tree[30000];
 
 int n,depth,branch;
 
@@ -40,7 +39,7 @@ int alpha_beta(int node,int d,bool MaxPlayer,int alpha,int beta)
             int x=alpha_beta(node*branch+i,d+1,true,alpha,beta);
 
             bestMin=min(bestMin,x);
-            beta=max(beta,bestMin);
+            beta=min(beta,bestMin);
 
 
             if(beta<=alpha)
